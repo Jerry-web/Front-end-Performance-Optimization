@@ -2,13 +2,21 @@
 ## 前端性能优化
 
 [内容部分](#user-content-内容部分)   
+
 [css部分](#user-content-css部分)   
-[js部分](#user-content-js部分)   
-[javascript, css](#user-content-javascript, css)   
+
+[js部分](#user-content-js部分)  
+
+[javascript和css](#user-content-javascript和css)   
+
 [图片](#user-content-图片)   
-[cookie](#user-content-cookie)
-移动端 
-服务器
+
+[cookie](#user-content-cookie)   
+
+[移动端](#user-content-移动端)   
+
+[服务器](#user-content-服务器)
+
 
  
 ## 内容部分
@@ -236,8 +244,7 @@ background-color: expression( (new Date()).getHours()%2 ? "#B8D4FF" : "#F08A00" 
 
  
 
-回到顶部
-javascript, css 
+## javascript和css 
  
 
 ### 19.把JavaScript和CSS放到外面
@@ -258,8 +265,7 @@ javascript, css
 
  
 
-回到顶部
-图片
+## 图片
  
 
 ### 21.优化图片
@@ -295,8 +301,8 @@ javascript, css
 设置合适的有效期HTTP头（以后如果想换的话就不能重命名了），把有效期设置为几个月后一般比较安全，可以通过检查当前favicon.ico的最后修改日期来确保变更能让浏览器知道。
  
 
-回到顶部
- cookie
+
+## cookie
  
 
 ### 25.给Cookie减肥
@@ -321,7 +327,7 @@ javascript, css
 
  
 
-##移动端 
+## 移动端 
  
 
 ### 27.保证所有组件都小于25K
