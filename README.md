@@ -392,15 +392,13 @@ HTTP/1.1 200 OK
       Content-Length: 12195
  ```
 　　然后，如果浏览器必须验证一个组件，它用If-None-Match请求头来把ETag传回源服务器。如果ETags匹配成功，会返回一个304状态码，这样就减少了12195个字节的响应体。
-  
 ```javascript
 GET /i/yahoo.gif HTTP/1.1
       Host: us.yimg.com
       If-Modified-Since: Tue, 12 Dec 2006 03:03:59 GMT
       If-None-Match: "10c24bc-4ab-457e1c1f"
       HTTP/1.1 304 Not Modified
-```　
-
+```
  
 
 ### 32.对Ajax用GET请求
