@@ -49,10 +49,11 @@ javascript, css
 ### 3.避免重定向
 
 重定向用301和302状态码，下面是一个有301状态码的HTTP头：
-
+```javascript
 HTTP/1.1 301 Moved Permanently
       Location: http://example.com/newuri
       Content-Type: text/html
+```
 　　浏览器会自动跳转到Location域指明的URL。重定向需要的所有信息都在HTTP头部，而响应体一般是空的。其实额外的HTTP头，比如Expires和Cache-Control也表示重定向。除此之外还有别的跳转方式：refresh元标签和JavaScript，但如果你必须得做重定向，最好用标准的3xxHTTP状态码，主要是为了让返回按钮能正常使用。
 
 　　牢记重定向会拖慢用户体验，在用户和HTML文档之间插入重定向会延迟页面上的所有东西，页面无法渲染，组件也无法开始下载，直到HTML文档被送达浏览器。
@@ -112,9 +113,9 @@ Gzip组件
 YUI CSS utilities对布局有很大帮助：grids.css针对整体布局，fonts.css和reset.css可以用来去除浏览器的默认格式。这是个开始清理和思考标记的好机会，例如只在语义上有意义的时候使用<div>，而不是因为它能够渲染一个新行。
 
 　　DOM元素的数量很容易测试，只需要在Firebug的控制台里输入：
-
+```javascript
 document.getElementsByTagName('*').length
- 
+ ```
 
 　　那么多少DOM元素才算是太多呢？可以参考其它类似的标记良好的页面，例如Yahoo!主页是一个相当繁忙的页面，但只有不到700个元素（HTML标签）。
 
@@ -162,9 +163,9 @@ css部分
 
 用CSS表达式动态设置CSS属性，是一种强大又危险的方式。从IE5开始支持，但从IE8起就不推荐使用了。例如，可以用CSS表达式把背景颜色设置成按小时交替的：
 
-1
+```javascript
 background-color: expression( (new Date()).getHours()%2 ? "#B8D4FF" : "#F08A00" );
- 
+ ```
 
 ### 12.选择<link>舍弃@import
 
@@ -206,9 +207,9 @@ background-color: expression( (new Date()).getHours()%2 ? "#B8D4FF" : "#F08A00" 
 
 　　避免不小心把相同脚本引入两次的一种方法就是在模版系统中实现脚本管理模块。典型的脚本引入方法就是在HTML页面中用SCRIPT标签：
 
-1
+```javascript
 <script type="text/javascript" src="menu_1.0.17.js"></script>
- 
+ ```
 
 ### 16.尽量减少DOM访问
 
@@ -277,8 +278,9 @@ javascript, css
 
 　　不要因为在HTML中可以设置宽高而使用本不需要的大图。如果需要
 
-1
+```javascript
 <img width="100" height="100" src="mycat.jpg" alt="My Cat" />
+```
 　　那么图片本身（mycat.jpg）应该是100x100px的，而不是去缩小500x500px的图片。
 
  
@@ -348,12 +350,14 @@ javascript, css
 
 从HTTP/1.1开始，web客户端就有了支持压缩的Accept-Encoding HTTP请求头。
 
-1
+```javascript
 Accept-Encoding: gzip, deflate
+```
 　　如果web服务器看到这个请求头，它就会用客户端列出的一种方式来压缩响应。web服务器通过Content-Encoding相应头来通知客户端。
 
-1
+```javascript
 Content-Encoding: gzip
+```
 　　尽可能多地用gzip压缩能够给页面减肥，这也是提升用户体验最简单的方法。
 
  
@@ -365,10 +369,14 @@ Content-Encoding: gzip
 Image with empty string src属性是空字符串的图片很常见，主要以两种形式出现：
 
 straight HTML
+```javascript
 <img src=””>
+```
 JavaScript
+```javascript
 var img = new Image();
 img.src = “”;
+```
 这两种形式都会引起相同的问题：浏览器会向服务器发送另一个请求。
 
 　
@@ -377,22 +385,20 @@ img.src = “”;
 
 　　实体标签（ETags），是服务器和浏览器用来决定浏览器缓存中组件与源服务器中的组件是否匹配的一种机制（“实体”也就是组件：图片，脚本，样式表等等）。添加ETags可以提供一种实体验证机制，比最后修改日期更加灵活。一个ETag是一个字符串，作为一个组件某一具体版本的唯一标识符。唯一的格式约束是字符串必须用引号括起来，源服务器用相应头中的ETag来指定组件的ETag：
 
-1
-2
-3
-4
+```javascript
 HTTP/1.1 200 OK
       Last-Modified: Tue, 12 Dec 2006 03:03:59 GMT
       ETag: "10c24bc-4ab-457e1c1f"
       Content-Length: 12195
+ ```
 　　然后，如果浏览器必须验证一个组件，它用If-None-Match请求头来把ETag传回源服务器。如果ETags匹配成功，会返回一个304状态码，这样就减少了12195个字节的响应体。
-
+```javascript
 GET /i/yahoo.gif HTTP/1.1
       Host: us.yimg.com
       If-Modified-Since: Tue, 12 Dec 2006 03:03:59 GMT
       If-None-Match: "10c24bc-4ab-457e1c1f"
       HTTP/1.1 304 Not Modified
-　
+```　
 
  
 
@@ -413,13 +419,13 @@ POST请求的一个有趣的副作用是实际上没有发送任何数据，就�
 　　较理想的清空缓冲区的位置是HEAD后面，因为HTML的HEAD部分通常更容易生成，并且允许引入任何CSS和JavaScript文件，这样就可以让浏览器在后台还在处理的时候就开始并行获取组件。
 
 例如：
-
+```javascript
  ... <!-- css, js -->
     </head>
     <?php flush(); ?>
     <body>
       ... <!-- content -->
- 
+ ```
 
 ### 34.使用CDN（内容分发网络）
 
@@ -443,9 +449,9 @@ POST请求的一个有趣的副作用是实际上没有发送任何数据，就�
 
 　　浏览器（和代理）用缓存来减少HTTP请求的数目和大小，让页面能够更快加载。web服务器通过有效期HTTP响应头来告诉客户端，页面的各个组件应该被缓存多久。用一个遥远的将来时间做有效期，告诉浏览器这个响应在2010年4月15日前不会改变。
 
-1
+```javascript
 Expires: Thu, 15 Apr 2010 20:00:00 GMT
-　　
+```　
 
 如果你用的是Apache服务器，用ExpiresDefault指令来设置相对于当前日期的有效期。下面的例子设置了从请求时间起10年的有效期：
 ```javascript
