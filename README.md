@@ -456,10 +456,10 @@ POST请求的一个有趣的副作用是实际上没有发送任何数据，就�
 
 ```Java
      Expires: Thu, 15 Apr 2010 20:00:00 GMT
-```　
+```   　
 
-如果你用的是Apache服务器，用ExpiresDefault指令来设置相对于当前日期的有效期。下面的例子设置了从请求时间起10年的有效期：
+   如果你用的是Apache服务器，用ExpiresDefault指令来设置相对于当前日期的有效期。下面的例子设置了从请求时间起10年的有效期：  
 
-```Java
+```Java   
     ExpiresDefault "access plus 10 years"
-```
+```   
