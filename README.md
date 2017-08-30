@@ -455,11 +455,11 @@ POST请求的一个有趣的副作用是实际上没有发送任何数据，就�
 　　浏览器（和代理）用缓存来减少HTTP请求的数目和大小，让页面能够更快加载。web服务器通过有效期HTTP响应头来告诉客户端，页面的各个组件应该被缓存多久。用一个遥远的将来时间做有效期，告诉浏览器这个响应在2010年4月15日前不会改变。
 
 ```javascript
-Expires: Thu, 15 Apr 2010 20:00:00 GMT
+   Expires: Thu, 15 Apr 2010 20:00:00 GMT
 ```　
 
 如果你用的是Apache服务器，用ExpiresDefault指令来设置相对于当前日期的有效期。下面的例子设置了从请求时间起10年的有效期：
 
 ```javascript
-ExpiresDefault "access plus 10 years"
+   ExpiresDefault "access plus 10 years"
 ```
